@@ -1,0 +1,39 @@
+{
+  "albums": [
+    "Memórias"
+  ],
+  "photos": [
+    {
+      "src": "assets/img/galeria/batata-com-flor.jpg",
+      "title": "Uma batata com uma flor",
+      "album": "Memórias",
+      "date": "",
+      "w": 626,
+      "h": 626
+    },
+    {
+      "src": "assets/img/galeria/o-tiro.jpg",
+      "title": "O tiro",
+      "album": "Memórias",
+      "date": "",
+      "w": 626,
+      "h": 626
+    },
+    {
+      "src": "assets/img/galeria/o-chao.jpg",
+      "title": "O chão",
+      "album": "Memórias",
+      "date": "",
+      "w": 1836,
+      "h": 3264
+    },
+    {
+      "src": "assets/img/galeria/o-espelho.jpg",
+      "title": "O espelho",
+      "album": "Memórias",
+      "date": "",
+      "w": 1836,
+      "h": 3264
+    }
+  ]
+}

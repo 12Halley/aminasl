@@ -1,0 +1,90 @@
+rules_version = "2";
+
+// ============================================================================
+// Regras do Firestore — projeto amina-9d61d
+// Estrutura usada pelo site:
+//   chats/amina-halley/messages/{id}   chat privado
+//   letters/{id}                       cartas (título, selo, publicada, desbloqueio)
+//   letterBodies/{id}                  texto das cartas (protegido até à hora)
+//   users/{uid}/opened/{letterId}      cartas já abertas (por pessoa)
+// Tudo o que não está listado fica NEGADO por omissão (não há regras abertas).
+// ============================================================================
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function isAmina()  { return signedIn() && request.auth.uid == "7T0hiCRudwVQjjoqcRAOduVx9v32"; }
+    function isHalley() { return signedIn() && request.auth.uid == "fA7hvZfvqOYfJ1yRS54uSgeBE6t2"; }
+    function isMember() { return isAmina() || isHalley(); }
+    function chatOk(chatId) { return chatId == "amina-halley"; }
+
+    // ---- Chat privado entre os dois ----
+    match /chats/{chatId}/messages/{msgId} {
+      allow read: if isMember() && chatOk(chatId);
+
+      // Só membros; o remetente tem de ser quem está autenticado; hora definida pelo servidor.
+      allow create: if isMember() && chatOk(chatId)
+        && request.resource.data.keys().hasAll(["text", "senderUid", "createdAt"])
+        && request.resource.data.keys().hasOnly(["text", "senderUid", "createdAt", "readBy"])
+        && request.resource.data.senderUid == request.auth.uid
+        && request.resource.data.text is string
+        && request.resource.data.text.size() > 0
+        && request.resource.data.text.size() <= 2000
+        && request.resource.data.createdAt == request.time
+        && (!("readBy" in request.resource.data)
+            || request.resource.data.readBy == [request.auth.uid]);
+
+      // O destinatário só pode marcar como lida (campo readBy); nada mais muda.
+      allow update: if isMember() && chatOk(chatId)
+        && resource.data.senderUid != request.auth.uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["readBy"])
+        && request.resource.data.readBy is list
+        && request.resource.data.readBy.size() <= 2
+        && request.auth.uid in request.resource.data.readBy;
+
+      // Cada pessoa só apaga as suas próprias mensagens.
+      allow delete: if isMember() && chatOk(chatId)
+        && resource.data.senderUid == request.auth.uid;
+    }
+
+    // ---- Cartas Open When ----
+    function letterOpenable(id) {
+      let l = get(/databases/$(database)/documents/letters/$(id)).data;
+      return l.get("published", false) == true
+        && (l.get("unlockAt", null) == null || request.time >= l.unlockAt);
+    }
+
+    // Metadados: o Halley gere tudo; a Amina só vê cartas publicadas.
+    match /letters/{id} {
+      allow read: if isHalley() || (isAmina() && resource.data.published == true);
+      allow create, update: if isHalley()
+        && request.resource.data.keys().hasOnly(["title", "emoji", "condition", "order", "published", "unlockAt", "createdAt", "updatedAt"])
+        && request.resource.data.title is string
+        && request.resource.data.title.size() > 0 && request.resource.data.title.size() <= 80
+        && request.resource.data.condition is string
+        && request.resource.data.condition.size() <= 160
+        && request.resource.data.published is bool;
+      allow delete: if isHalley();
+    }
+
+    // Texto: a Amina só lê se a carta estiver publicada e a hora de desbloqueio já tiver passado
+    // (verificado com a hora do servidor, não com a do telemóvel).
+    match /letterBodies/{id} {
+      allow read: if isHalley() || (isAmina() && letterOpenable(id));
+      allow create, update: if isHalley()
+        && request.resource.data.keys().hasOnly(["body", "updatedAt"])
+        && request.resource.data.body is string
+        && request.resource.data.body.size() <= 20000;
+      allow delete: if isHalley();
+    }
+
+    // ---- Cartas já abertas: cada pessoa escreve só o seu estado; os dois podem ler ----
+    match /users/{uid}/opened/{letterId} {
+      allow read: if isMember();
+      allow create, update: if isMember() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(["openedAt"])
+        && request.resource.data.openedAt == request.time;
+      allow delete: if isMember() && request.auth.uid == uid;
+    }
+  }
+}

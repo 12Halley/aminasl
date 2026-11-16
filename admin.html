@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b0e22">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/base.css"><link rel="stylesheet" href="css/paginas.css"><link rel="stylesheet" href="css/app.css">
+<title>Gerir cartas</title>
+</head>
+<body>
+<a class="back" href="cartas.html">Cartas</a>
+<main class="page">
+  <header class="page-head"><h1>Gerir cartas</h1><p>Só o Halley vê esta página. A Amina só lê cartas publicadas e já desbloqueadas.</p></header>
+  <div class="aviso" id="aviso" role="status" hidden></div>
+  <div class="adm">
+    <section aria-label="Cartas">
+      <div class="acoes" style="margin:0 0 .9rem"><button class="btn small" id="nova" type="button">Nova carta</button><button class="btn ghost small" id="modelos" type="button">Criar as 5 cartas-modelo</button></div>
+      <ul class="lista-adm" id="lista"></ul>
+    </section>
+    <form class="card" id="form" autocomplete="off">
+      <div class="campo"><label for="titulo">Título</label><input id="titulo" maxlength="80" required placeholder="Open when you’re sad"></div>
+      <div class="campo"><label for="cond">Frase por baixo do título (opcional)</label><input id="cond" maxlength="160" placeholder="Para os dias mais difíceis"></div>
+      <div class="campo"><label for="texto">Texto da carta</label><textarea id="texto" rows="10" maxlength="20000" placeholder="Escreve aqui a tua carta…"></textarea></div>
+      <div class="campo"><label for="desbloqueio">Desbloquear em (opcional, hora do teu dispositivo)</label><input id="desbloqueio" type="datetime-local"></div>
+      <div class="campo"><label for="ordem">Ordem na lista</label><input id="ordem" type="number" value="1" min="0" step="1"></div>
+      <label class="check"><input id="pub" type="checkbox"> Publicada (visível para a Amina)</label>
+      <div class="acoes"><button class="btn" type="submit" id="guardar">Guardar</button><button class="btn perigo" type="button" id="apagar" hidden>Apagar</button></div>
+    </form>
+  </div>
+</main>
+<script type="module">import "./js/ui.js"; import "./js/admin.js";</script>
+</body>
+</html>

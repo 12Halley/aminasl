@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b0e22">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/base.css"><link rel="stylesheet" href="css/paginas.css"><link rel="stylesheet" href="css/app.css">
+<title>Entrar</title>
+</head>
+<body>
+<a class="back" href="index.html">Início</a>
+<main class="page"><div class="auth card">
+  <h1>Entrar</h1>
+  <p class="muted" style="margin-bottom:1.4rem">Esta área é privada: só a Amina e o Halley têm acesso.</p>
+  <div class="aviso" id="aviso" role="alert" hidden></div>
+  <button class="btn full" id="google" type="button">Entrar com Google</button>
+  <div class="sep">ou com email</div>
+  <form id="login" autocomplete="on">
+    <div class="campo"><label for="email">Email</label><input id="email" type="email" inputmode="email" autocomplete="username" required></div>
+    <div class="campo"><label for="pass">Palavra-passe</label><input id="pass" type="password" autocomplete="current-password" required></div>
+    <button class="btn full" type="submit">Entrar</button>
+  </form>
+  <button class="link" id="esqueci" type="button">Esqueci-me da palavra-passe</button>
+</div></main>
+<script type="module">import "./js/ui.js"; import "./js/login.js";</script>
+</body>
+</html>

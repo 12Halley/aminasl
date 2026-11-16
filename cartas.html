@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b0e22">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/base.css"><link rel="stylesheet" href="css/paginas.css"><link rel="stylesheet" href="css/app.css">
+<title>Cartas </title>
+</head>
+<body>
+<a class="back" href="index.html">Início</a>
+<main class="page">
+  <header class="page-head">
+    <h1>Cartas «Open When»</h1>
+    <p id="intro">Escolhe a carta para o momento em que estás. As que têm cadeado ainda não podem ser abertas.</p>
+    <p style="margin-top:1rem"><a id="admLink" class="btn ghost small" href="admin.html" hidden>Gerir cartas</a></p>
+  </header>
+  <div class="estado" id="estado">A carregar cartas…</div>
+  <ul class="envs" id="envs"></ul>
+</main>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTit">
+  <div class="papel"><button class="fechar" id="mFechar" type="button" aria-label="Fechar"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+    <h2 id="mTit"></h2><p class="cond" id="mCond"></p><div class="texto" id="mTxt"></div></div>
+</div>
+<script type="module">import "./js/ui.js"; import "./js/music.js"; import "./js/cartas.js";</script>
+</body>
+</html>

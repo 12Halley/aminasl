@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b0e22">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/base.css"><link rel="stylesheet" href="css/paginas.css">
+<title>Bem-vinda, Amina</title>
+<meta name="description" content="Um cantinho feito para a Amina.">
+</head>
+<body>
+<main class="home">
+  <header class="home-head">
+    <h1>Bem-vinda,<br>Amina.</h1>
+    <p class="lead">Eu te amo muito, minha Rapunzel.</p>
+  </header>
+  <nav aria-label="Menu principal">
+    <ul class="menu">
+      <li><a href="pagina2.html"><span class="nome">Jogos</span><span class="desc">Dez jogos para passar o tempo</span></a></li>
+      <li><a href="quiz.html"><span class="nome">Quiz Amina</span><span class="desc">Anime, música e filmes</span></a></li>
+      <li><a href="galeria.html"><span class="nome">Galeria das Memórias</span><span class="desc">As nossas fotografias</span></a></li>
+      <li><a href="chat.html"><span class="nome">Chat privado</span><span class="desc">Conversa só entre nós os dois</span></a></li>
+      <li><a href="cartas.html"><span class="nome">Cartas</span><span class="desc">Uma carta para cada momento</span></a></li>
+    </ul>
+    <p id="sessao"></p>
+  </nav>
+</main>
+<script type="module">
+  import { criarLanternas } from "./js/ui.js";
+  import "./js/music.js";
+  import "./js/sessao.js";
+  criarLanternas();
+</script>
+</body>
+</html>

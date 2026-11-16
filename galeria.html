@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b0e22">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/base.css"><link rel="stylesheet" href="css/paginas.css">
+<title>Galeria das Memórias</title>
+</head>
+<body>
+<a class="back" href="index.html">Início</a>
+<main class="page">
+  <header class="page-head">
+    <h1>Galeria das Memórias</h1>
+    <p>Toca numa fotografia para a ver em grande. Desliza para ver as outras.</p>
+  </header>
+  <div class="albuns" id="albuns" role="group" aria-label="Álbuns" hidden></div>
+  <div class="mosaico" id="mosaico"></div>
+  <p class="vazio" id="vazio" hidden>Ainda não há fotografias neste álbum.</p>
+</main>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Fotografia ampliada">
+  <div class="lb-topo"><span class="lb-cont" id="lbCont"></span><button class="lb-x" id="lbX" type="button" aria-label="Fechar"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div>
+  <div class="lb-palco" id="lbPalco">
+    <button class="lb-nav ant" id="lbAnt" type="button" aria-label="Fotografia anterior">&lsaquo;</button>
+    <img id="lbImg" alt="" draggable="false">
+    <button class="lb-nav seg" id="lbSeg" type="button" aria-label="Fotografia seguinte">&rsaquo;</button>
+  </div>
+  <div class="lb-legenda" id="lbLeg"></div>
+</div>
+<script type="module">import "./js/ui.js"; import "./js/music.js"; import "./js/galeria.js";</script>
+</body>
+</html>

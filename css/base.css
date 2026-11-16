@@ -1,0 +1,102 @@
+/* ==========================================================================
+   Noite das lanternas — sistema visual
+   Céu de índigo com brasa de ameixa no horizonte; luz âmbar das lanternas.
+   Display: Bodoni Moda · Interface: Hanken Grotesk
+   ========================================================================== */
+:root{
+  --noite:#0b0e22;
+  --painel:#11153a;
+  --painel-2:#1a1f4d;
+  --veu:rgba(14,18,48,.72);
+  --linha:rgba(238,222,190,.15);
+  --linha-forte:rgba(238,222,190,.34);
+  --lume:#f2bb62;
+  --lume-2:#f8d99c;
+  --brasa:#c9823a;
+  --vinho:#7d2338;
+  --creme:#f2e8d5;
+  --creme-2:rgba(242,232,213,.70);
+  --creme-3:rgba(242,232,213,.44);
+  --lilas:#b6a2dd;
+  --ok:#93d3a6;
+  --erro:#e8908a;
+  --serif:'Bodoni Moda','Bodoni 72','Didot',Georgia,'Times New Roman',serif;
+  --sans:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --r:6px;
+  --safe-b:env(safe-area-inset-bottom,0px);
+  --safe-t:env(safe-area-inset-top,0px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;background:var(--noite);color-scheme:dark;scroll-behavior:smooth}
+body{
+  font-family:var(--sans);font-size:1.0625rem;line-height:1.6;color:var(--creme);
+  min-height:100vh;min-height:100dvh;padding-top:var(--safe-t);overflow-x:hidden;
+  font-optical-sizing:auto;-webkit-font-smoothing:antialiased;
+}
+/* O céu fica num elemento fixo (iOS não gosta de background-attachment:fixed) */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(80% 40% at 50% 106%,rgba(226,142,96,.26),transparent 72%),
+    linear-gradient(180deg,#060815 0%,#0b0e2a 38%,#171848 76%,#2e2050 100%);
+}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--lume);outline-offset:3px;border-radius:3px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+[hidden]{display:none!important}
+
+/* ---- Tipografia ---- */
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spacing:-.01em}
+h1{font-size:clamp(2.3rem,8vw,3.6rem)}
+h2{font-size:clamp(1.4rem,4.6vw,1.8rem)}
+.lead{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(1.2rem,4.4vw,1.5rem);color:var(--creme-2)}
+.muted{color:var(--creme-2)}
+.sky{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+/* ---- Estrutura de página ---- */
+.page{position:relative;z-index:1;width:min(100%,1080px);margin-inline:auto;padding:5.2rem 1.25rem calc(3.5rem + var(--safe-b))}
+.page-head{margin-bottom:2rem}
+.page-head p{margin-top:.6rem;color:var(--creme-2);max-width:48ch}
+.page-head::after{content:"";display:block;margin-top:1.5rem;height:1px;background:linear-gradient(90deg,var(--lume),transparent 65%);opacity:.5}
+
+/* ---- Botões ---- */
+.back{
+  position:fixed;z-index:60;top:calc(.75rem + var(--safe-t));left:.75rem;
+  display:inline-flex;align-items:center;gap:.55rem;min-height:42px;padding:.3rem .95rem .3rem .8rem;
+  background:rgba(8,10,28,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid var(--linha);border-radius:var(--r);text-decoration:none;font-size:.92rem;font-weight:500;color:var(--creme-2);
+  transition:color .2s,border-color .2s;
+}
+.back::before{content:"";width:.5rem;height:.5rem;border-left:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translate(1px,-1px)}
+.back:hover{color:var(--lume-2);border-color:var(--linha-forte)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:46px;padding:.65rem 1.5rem;
+  border:1px solid var(--lume);border-radius:var(--r);font-weight:600;font-size:.98rem;letter-spacing:.01em;text-decoration:none;
+  background:var(--lume);color:#1d1330;transition:background .2s,border-color .2s,color .2s,transform .12s;
+}
+.btn:hover{background:var(--lume-2);border-color:var(--lume-2)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:transparent;color:var(--creme);border-color:var(--linha-forte)}
+.btn.ghost:hover{border-color:var(--lume);color:var(--lume-2);background:rgba(242,187,98,.06)}
+.btn.small{min-height:40px;padding:.4rem 1.05rem;font-size:.9rem}
+
+/* ---- Música (js/music.js) ---- */
+.music{
+  position:fixed;z-index:60;right:.75rem;bottom:calc(.75rem + var(--safe-b));width:46px;height:46px;
+  display:grid;place-items:center;border-radius:var(--r);color:var(--creme-2);
+  background:rgba(8,10,28,.7);border:1px solid var(--linha);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  transition:color .2s,border-color .2s;
+}
+.music:hover{color:var(--lume-2);border-color:var(--linha-forte)}
+.music[aria-pressed="true"]{color:var(--lume);border-color:rgba(242,187,98,.55)}
+.music svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.eq{display:flex;gap:3px;align-items:flex-end;height:16px}
+.eq i{width:3px;background:currentColor;border-radius:1px;animation:eq 1s ease-in-out infinite}
+.eq i:nth-child(1){height:60%}.eq i:nth-child(2){height:100%;animation-delay:.25s}.eq i:nth-child(3){height:45%;animation-delay:.5s}
+@keyframes eq{50%{transform:scaleY(.4);transform-origin:bottom}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
